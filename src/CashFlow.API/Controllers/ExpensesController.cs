@@ -12,7 +12,7 @@ public class ExpensesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegisterExpenseJson), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Register([FromServices] IRegisterExpenseUseCase useCase, [FromBody] RequestRegisterExpenseJson request)
+    public async Task<IActionResult> Register([FromServices] IRegisterExpenseUseCase useCase, [FromBody] RequestExpenseJson request)
     {
         var response = await useCase.Execute(request);
         return Created(string.Empty, response);
@@ -41,10 +41,27 @@ public class ExpensesController : ControllerBase
     [Route("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete([FromServices] IDeleteExpenseUseCase useCase, [FromRoute] long id)
+    public async Task<IActionResult> Delete(
+        [FromServices] IDeleteExpenseUseCase useCase,
+        [FromRoute] long id
+    )
     {
-        await useCase.Execute();
+        await useCase.Execute(id);
         return NoContent();
     }
 
+    [HttpPut]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Update(
+        [FromServices] IUpdateExpenseUseCase useCase,
+        [FromRoute] long id,
+        [FromBody] RequestExpenseJson request
+    )
+    {
+        await useCase.Execute(id, request);
+        return NoContent();
+    }
 }
