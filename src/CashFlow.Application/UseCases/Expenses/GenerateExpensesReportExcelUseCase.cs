@@ -1,12 +1,25 @@
-﻿using CashFlow.Domain.Reports;
+﻿using CashFlow.Domain.Enums;
+using CashFlow.Domain.Reports;
+using CashFlow.Domain.Repositories;
 using ClosedXML.Excel;
 
 namespace CashFlow.Application.UseCases.Expenses;
 
 class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
 {
+    private readonly IExpensesReadOnlyRepository _expensesReadOnlyRepository;
+
+    public GenerateExpensesReportExcelUseCase(IExpensesReadOnlyRepository expensesReadOnlyRepository)
+    {
+        _expensesReadOnlyRepository = expensesReadOnlyRepository;
+    }
+
     public async Task<byte[]> Execute(DateOnly month)
     {
+        var expenses = await _expensesReadOnlyRepository.FilterByMonth(month);
+
+        if (expenses.Count == 0) return [];
+
         var workbook = new XLWorkbook
         {
             Author = "Daniel"
@@ -18,10 +31,34 @@ class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
         var worksheet = workbook.Worksheets.Add(month.ToString("Y"));
         InsertHeader(worksheet);
 
+        var raw = 2;
+        foreach (var expense in expenses)
+        {
+            worksheet.Cell($"A{2}").Value = expense.Title;
+            worksheet.Cell($"B{2}").Value = expense.Date;
+            worksheet.Cell($"C{2}").Value = ConvertPaymentType(expense.PaymentType);
+            worksheet.Cell($"D{2}").Value = expense.Amount;
+            worksheet.Cell($"E{2}").Value = expense.Description;
+            raw++;
+        }
+
         var file = new MemoryStream();
         workbook.SaveAs(file);
 
         return file.ToArray();
+    }
+
+    //todo: refactor
+    private string ConvertPaymentType(PaymentType paymentType)
+    {
+        return paymentType switch
+        {
+            PaymentType.Cash => "Cash",
+            PaymentType.CreditCard => "Cartão de Crédito",
+            PaymentType.DebitCard => "Cartão de Débito",
+            PaymentType.EletronicTransfer => "Transferência Bancária",
+            _ => string.Empty
+        };
     }
 
     private void InsertHeader(IXLWorksheet worksheet)
