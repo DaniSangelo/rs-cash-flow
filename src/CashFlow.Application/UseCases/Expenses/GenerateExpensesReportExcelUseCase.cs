@@ -8,6 +8,7 @@ namespace CashFlow.Application.UseCases.Expenses;
 class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
 {
     private readonly IExpensesReadOnlyRepository _expensesReadOnlyRepository;
+    private const string CURRENCY_SYMBOL = "R$";
 
     public GenerateExpensesReportExcelUseCase(IExpensesReadOnlyRepository expensesReadOnlyRepository)
     {
@@ -20,7 +21,7 @@ class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
 
         if (expenses.Count == 0) return [];
 
-        var workbook = new XLWorkbook
+        using var workbook = new XLWorkbook
         {
             Author = "Daniel"
         };
@@ -37,10 +38,15 @@ class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
             worksheet.Cell($"A{2}").Value = expense.Title;
             worksheet.Cell($"B{2}").Value = expense.Date;
             worksheet.Cell($"C{2}").Value = ConvertPaymentType(expense.PaymentType);
+
             worksheet.Cell($"D{2}").Value = expense.Amount;
+            worksheet.Cell($"D{2}").Style.NumberFormat.Format = $"- {CURRENCY_SYMBOL} #,##0.00";
+
             worksheet.Cell($"E{2}").Value = expense.Description;
             raw++;
         }
+
+        worksheet.Columns().AdjustToContents();
 
         var file = new MemoryStream();
         workbook.SaveAs(file);
