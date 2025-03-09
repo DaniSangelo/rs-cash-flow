@@ -9,4 +9,7 @@ public class Expense
     public decimal Amount { get; set; }
     public DateTime Date { get; set; }
     public PaymentType PaymentType { get; set; }
+
+    public long UserId { get; set; }
+    public User User { get; set; } = default!; //the command "default!" says to .net that the property never will be null
 }
