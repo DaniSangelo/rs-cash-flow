@@ -70,6 +70,24 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email is already in use.
+        /// </summary>
+        public static string EMAIL_ALREADY_IN_USE {
+            get {
+                return ResourceManager.GetString("EMAIL_ALREADY_IN_USE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email must be provided.
+        /// </summary>
+        public static string EMAIL_EMPTY {
+            get {
+                return ResourceManager.GetString("EMAIL_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expense not found.
         /// </summary>
         public static string EXPENSE_NOT_FOUND {
@@ -88,11 +106,38 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid email.
+        /// </summary>
+        public static string INVALID_EMAIL {
+            get {
+                return ResourceManager.GetString("INVALID_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid password.
+        /// </summary>
+        public static string INVALID_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid payment type.
         /// </summary>
         public static string INVALID_PAYMENT_TYPE {
             get {
                 return ResourceManager.GetString("INVALID_PAYMENT_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name must be provided.
+        /// </summary>
+        public static string NAME_EMPTY {
+            get {
+                return ResourceManager.GetString("NAME_EMPTY", resourceCulture);
             }
         }
         
