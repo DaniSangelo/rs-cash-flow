@@ -8,4 +8,6 @@ public class BCrypt : IPasswordEncrypter
     {
         return BC.HashPassword(password);
     }
+
+    public bool Verify(string password, string passwordHash) => BC.Verify(password, passwordHash);
 }

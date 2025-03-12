@@ -106,6 +106,15 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid credentials.
+        /// </summary>
+        public static string INVALID_CREDENTIALS {
+            get {
+                return ResourceManager.GetString("INVALID_CREDENTIALS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid email.
         /// </summary>
         public static string INVALID_EMAIL {
