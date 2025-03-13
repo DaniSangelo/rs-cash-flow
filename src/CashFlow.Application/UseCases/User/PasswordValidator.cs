@@ -16,7 +16,7 @@ public class PasswordValidator<T> : PropertyValidator<T, string>
 
     public override bool IsValid(ValidationContext<T> context, string password)
     {
-        if (string.IsNullOrWhiteSpace(password) || password.Length < 8 || !Regex.IsMatch(password, @"[a-zA-Z0-9\!\?\*\.]+"))
+        if (string.IsNullOrWhiteSpace(password) || password.Length < 8 || !Regex.IsMatch(password, @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$"))
         {
             context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, ResourceErrorMessages.INVALID_PASSWORD);
             return false;
