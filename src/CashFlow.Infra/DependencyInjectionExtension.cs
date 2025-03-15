@@ -2,10 +2,12 @@
 using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Security.Cryptography;
 using CashFlow.Domain.Security.Tokens;
+using CashFlow.Domain.Services.LoggedUser;
 using CashFlow.Infra.DataAccess;
 using CashFlow.Infra.DataAccess.Repositories;
 using CashFlow.Infra.Extensions;
 using CashFlow.Infra.Security;
+using CashFlow.Infra.Services.LoggedUser;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,7 @@ public static class DependencyInjectionExtension
     public static void AddInfra(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IPasswordEncrypter, Security.BCrypt>();
+        services.AddScoped<ILoggedUser, LoggedUser>();
         AddToken(services, configuration);
         AddRepositories(services);
         if (!configuration.IsTestEnv())
