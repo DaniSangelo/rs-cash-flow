@@ -3,27 +3,21 @@ using CommonTestUtilities.Requests;
 using FluentAssertions;
 using System.Globalization;
 using System.Net;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text.Json;
 using WebApi.Test.InLineData;
 
 namespace WebApi.Test.Users;
 
-public class RegisterUserTest : IClassFixture<CustomWebAppFactory>
+public class RegisterUserTest : CashFlowClassFixture
 {
     private const string REGISTER_USER_RESOURCE = "api/User";
-    private readonly HttpClient _httpClient;
-    public RegisterUserTest(CustomWebAppFactory webApp)
-    {
-        _httpClient = webApp.CreateClient();
-    }
+    public RegisterUserTest(CustomWebAppFactory webApp) : base(webApp){ }
 
     [Fact]
     public async Task Success()
     {
         var request = RequestRegisterUserJsonBuilder.Build();
-        var result = await _httpClient.PostAsJsonAsync(REGISTER_USER_RESOURCE, request);
+        var result = await SendPost(REGISTER_USER_RESOURCE, request);
         result.StatusCode.Should().Be(HttpStatusCode.Created);
         var body = await result.Content.ReadAsStreamAsync();
         var response = await JsonDocument.ParseAsync(body);
@@ -36,7 +30,7 @@ public class RegisterUserTest : IClassFixture<CustomWebAppFactory>
     {
         var request = RequestRegisterUserJsonBuilder.Build();
         request.Name = string.Empty;
-        var result = await _httpClient.PostAsJsonAsync(REGISTER_USER_RESOURCE, request);
+        var result = await SendPost(REGISTER_USER_RESOURCE, request);
         result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         var body = await result.Content.ReadAsStreamAsync();
         var response = await JsonDocument.ParseAsync(body);
@@ -50,8 +44,7 @@ public class RegisterUserTest : IClassFixture<CustomWebAppFactory>
     {
         var request = RequestRegisterUserJsonBuilder.Build();
         request.Name = string.Empty;
-        _httpClient.DefaultRequestHeaders.AcceptLanguage.Add(new StringWithQualityHeaderValue(cultureInfo));
-        var result = await _httpClient.PostAsJsonAsync(REGISTER_USER_RESOURCE, request);
+        var result = await SendPost(resource: REGISTER_USER_RESOURCE, request: request, cultureInfo: cultureInfo);
         result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         var body = await result.Content.ReadAsStreamAsync();
         var response = await JsonDocument.ParseAsync(body);
