@@ -48,4 +48,15 @@ public class CashFlowClassFixture : IClassFixture<CustomWebAppFactory>
         _httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
         _httpClient.DefaultRequestHeaders.AcceptLanguage.Add(new StringWithQualityHeaderValue(cultureInfo));
     }
+
+    protected async Task<HttpResponseMessage> SendDelete(
+    string resource,
+    string token,
+    string culture = "en")
+    {
+        AuthorizeRequest(token);
+        ChangeRequestCulture(culture);
+
+        return await _httpClient.DeleteAsync(resource);
+    }
 }

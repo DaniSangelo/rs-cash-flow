@@ -28,7 +28,7 @@ public class DeleteExpenseUseCase : IDeleteExpenseUseCase
     public async Task Execute(long id)
     {
         var loggedUser = await _loggedUser.Get();
-        var expense = await _expensesReadRepository.GetById(loggedUser, loggedUser.Id) ?? throw new NotFoundException(ResourceErrorMessages.EXPENSE_NOT_FOUND);
+        var expense = await _expensesReadRepository.GetById(loggedUser, id) ?? throw new NotFoundException(ResourceErrorMessages.EXPENSE_NOT_FOUND);
         await _expensesRepository.Delete(id);
         await _unitOfWork.Commit();
     }
