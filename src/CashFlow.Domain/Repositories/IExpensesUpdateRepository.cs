@@ -5,5 +5,5 @@ namespace CashFlow.Domain.Repositories;
 public interface IExpensesUpdateRepository
 {
     void Update(Expense expense);
-    Task<Expense?> GetById(long id);
+    Task<Expense?> GetById(User user, long id);
 }
