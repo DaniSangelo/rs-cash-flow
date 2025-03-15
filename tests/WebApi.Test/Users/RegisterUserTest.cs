@@ -1,16 +1,15 @@
 ﻿using CommonTestUtilities.Requests;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net;
 using System.Net.Http.Json;
 
 namespace WebApi.Test.Users;
 
-public class RegisterUserTest : IClassFixture<WebApplicationFactory<Program>>
+public class RegisterUserTest : IClassFixture<CustomWebAppFactory>
 {
     private const string REGISTER_USER_RESOURCE = "api/User";
     private readonly HttpClient _httpClient;
-    public RegisterUserTest(WebApplicationFactory<Program> webApp)
+    public RegisterUserTest(CustomWebAppFactory webApp)
     {
         _httpClient = webApp.CreateClient();
     }
