@@ -21,11 +21,11 @@ class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
 
     public async Task<byte[]> Execute(DateOnly month)
     {
-        var expenses = await _expensesReadOnlyRepository.FilterByMonth(month);
+        var loggedUser = await _loggedUser.Get();
+        var expenses = await _expensesReadOnlyRepository.FilterByMonth(loggedUser, month);
 
         if (expenses.Count == 0) return [];
 
-        var loggedUser = await _loggedUser.Get();
 
         using var workbook = new XLWorkbook
         {
