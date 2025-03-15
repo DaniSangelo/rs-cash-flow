@@ -1,4 +1,5 @@
 ﻿using CashFlow.Domain.Entities;
+using CashFlow.Domain.Enums;
 using CashFlow.Domain.Security.Cryptography;
 using CashFlow.Domain.Security.Tokens;
 using CashFlow.Infra.DataAccess;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using PdfSharp.Drawing;
 using WebApi.Test.Resources;
 
 namespace WebApi.Test;
@@ -44,8 +46,13 @@ public class CustomWebAppFactory : WebApplicationFactory<Program>
     )
     {
         var userTeamMember = AddUserTeamMember(dbContext, passwordEncrypter, accessTokenGenerator);
-        AddExpenses(dbContext, userTeamMember);
+        var expenseMember = AddExpenses(dbContext, userTeamMember, 1);
+        Expense_Team_Member = new ExpenseIdentityManager(expenseMember);
+
         var userAdmin = AddUserAdmin(dbContext, passwordEncrypter, accessTokenGenerator);
+        var expenseAdmin = AddExpenses(dbContext, userTeamMember, 2);
+        Expense_Admin = new ExpenseIdentityManager(expenseAdmin);
+
         dbContext.SaveChanges();
     }
 
@@ -71,7 +78,7 @@ public class CustomWebAppFactory : WebApplicationFactory<Program>
         IAccessTokenGenerator accessTokenGenerator
     )
     {
-        var user = UserBuilder.Build();
+        var user = UserBuilder.Build(Roles.ADMIN);
         user.Id = 2;
         var password = user.Password;
         user.Password = passwordEncrypter.Encrypt(user.Password);
@@ -81,11 +88,12 @@ public class CustomWebAppFactory : WebApplicationFactory<Program>
         return user;
     }
 
-    private void AddExpenses(CashFlowDbContext dbContext, User user)
+    private Expense AddExpenses(CashFlowDbContext dbContext, User user, long expenseId)
     {
         var expense = ExpenseBuilder.Build(user);
+        expense.Id = expenseId;
         dbContext.Expenses.Add(expense);
 
-        Expense_Team_Member = new ExpenseIdentityManager(expense);
+        return expense;
     }
 }
