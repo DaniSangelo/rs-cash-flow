@@ -59,4 +59,17 @@ public class CashFlowClassFixture : IClassFixture<CustomWebAppFactory>
 
         return await _httpClient.DeleteAsync(resource);
     }
+
+    protected async Task<HttpResponseMessage> SendPut(
+        string requestUri,
+        object request,
+        string token,
+        string culture = "en"
+    )
+    {
+        AuthorizeRequest(token);
+        ChangeRequestCulture(culture);
+
+        return await _httpClient.PutAsJsonAsync(requestUri, request);
+    }
 }
