@@ -37,11 +37,23 @@ public class CustomWebAppFactory : WebApplicationFactory<Program>
 
     private void StartDatabase(CashFlowDbContext dbContext, IPasswordEncrypter passwordEncrypter)
     {
+        AddUser(dbContext, passwordEncrypter);
+        AddExpenses(dbContext, _user);
+        dbContext.SaveChanges();
+    }
+
+    private void AddUser(CashFlowDbContext dbContext, IPasswordEncrypter passwordEncrypter)
+    {
         _user = UserBuilder.Build();
         _password = _user.Password;
         _user.Password = passwordEncrypter.Encrypt(_user.Password);
         dbContext.Users.Add(_user);
-        dbContext.SaveChanges();
+    }
+
+    private void AddExpenses(CashFlowDbContext dbContext, User user)
+    {
+        var expense = ExpenseBuilder.Build(user);
+        dbContext.Expenses.Add(expense);
     }
 
     public string GetEmail() => _user.Email;
