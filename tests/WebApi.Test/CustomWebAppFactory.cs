@@ -15,6 +15,7 @@ public class CustomWebAppFactory : WebApplicationFactory<Program>
     private User _user;
     private string _password;
     private string _token;
+    private Expense _expense;
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Test")
@@ -52,12 +53,13 @@ public class CustomWebAppFactory : WebApplicationFactory<Program>
 
     private void AddExpenses(CashFlowDbContext dbContext, User user)
     {
-        var expense = ExpenseBuilder.Build(user);
-        dbContext.Expenses.Add(expense);
+        _expense = ExpenseBuilder.Build(user);
+        dbContext.Expenses.Add(_expense);
     }
 
     public string GetEmail() => _user.Email;
     public string GetName() => _user.Name;
     public string GetPassword() => _password;
     public string GetToken() => _token;
+    public long GetExpenseId() => _expense.Id;
 }
