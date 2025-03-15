@@ -20,9 +20,9 @@ public class LoginTest : CashFlowClassFixture
 
     public LoginTest(CustomWebAppFactory webApp) : base(webApp)
     {
-        _email = webApp.GetEmail();
-        _name = webApp.GetName();
-        _password = webApp.GetPassword();
+        _email = webApp.User_Team_Member.GetEmail();
+        _name = webApp.User_Team_Member.GetName();
+        _password = webApp.User_Team_Member.GetPassword();
     }
 
     [Fact]
