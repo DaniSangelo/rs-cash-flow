@@ -153,4 +153,7 @@
   <data name="INVALID_CREDENTIALS" xml:space="preserve">
     <value>Invalid credentials</value>
   </data>
+  <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
+    <value>The password entered is different from the current password.</value>
+  </data>
 </root>

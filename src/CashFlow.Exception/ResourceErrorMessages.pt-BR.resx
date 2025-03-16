@@ -153,4 +153,7 @@
   <data name="INVALID_CREDENTIALS" xml:space="preserve">
     <value>Credenciais inválidas</value>
   </data>
+  <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
+    <value>A senha inserida é diferente da senha atual.</value>
+  </data>
 </root>
