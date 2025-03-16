@@ -12,4 +12,5 @@ public class Expense
 
     public long UserId { get; set; }
     public User User { get; set; } = default!; //the command "default!" says to .net that the property never will be null
+    public ICollection<Tag> Tags { get; set; } = [];
 }
