@@ -2,14 +2,13 @@
 using CashFlow.Communication.Requests;
 using FluentAssertions;
 using FluentValidation;
+using WebApi.Test.InLineData;
 
 namespace ValidatorsTest.Users;
 public class PasswordValidatorTest
 {
     [Theory]
-    [InlineData("")]
-    [InlineData("        ")]
-    [InlineData(null)]
+    [ClassData(typeof(EmptyOrNullInLineDataTest))]
     [InlineData("aaaaaaa")]
     [InlineData("aaaaaaaa")]
     [InlineData("AAAAAAAA")]

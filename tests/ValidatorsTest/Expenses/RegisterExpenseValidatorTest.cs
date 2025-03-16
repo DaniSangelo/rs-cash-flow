@@ -3,6 +3,7 @@ using CashFlow.Communication.Enums;
 using CashFlow.Exception;
 using CommonTestUtilities.Requests;
 using FluentAssertions;
+using WebApi.Test.InLineData;
 
 namespace ValidatorsTest.Expenses;
 
@@ -23,9 +24,7 @@ public class RegisterExpenseValidatorTest
     }
 
     [Theory]
-    [InlineData("")]
-    [InlineData("               ")]
-    [InlineData(null)]
+    [ClassData(typeof(EmptyOrNullInLineDataTest))]
     public void Error_Title_Empty(string title)
     {
         // Arrange

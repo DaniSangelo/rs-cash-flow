@@ -22,6 +22,7 @@
     <ProjectReference Include="..\..\src\CashFlow.Communication\CashFlow.Communication.csproj" />
     <ProjectReference Include="..\..\src\CashFlow.Exception\CashFlow.Exception.csproj" />
     <ProjectReference Include="..\CommonTestUtilities\CommonTestUtilities.csproj" />
+    <ProjectReference Include="..\WebApi.Test\WebApi.Test.csproj" />
   </ItemGroup>
 
   <ItemGroup>

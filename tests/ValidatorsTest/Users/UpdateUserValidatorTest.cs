@@ -2,6 +2,7 @@
 using CashFlow.Exception;
 using CommonTestUtilities.Requests;
 using FluentAssertions;
+using WebApi.Test.InLineData;
 
 namespace ValidatorsTest.Users;
 
@@ -17,9 +18,7 @@ public class UpdateUserValidatorTest
     }
 
     [Theory]
-    [InlineData("")]
-    [InlineData("      ")]
-    [InlineData(null)]
+    [ClassData(typeof(EmptyOrNullInLineDataTest))]
     public void Error_Name_Empty(string name)
     {
         var validator = new UpdateUserValidator();
@@ -31,9 +30,7 @@ public class UpdateUserValidatorTest
     }
 
     [Theory]
-    [InlineData("")]
-    [InlineData("      ")]
-    [InlineData(null)]
+    [ClassData(typeof(EmptyOrNullInLineDataTest))]
     public void Error_Email_Empty(string email)
     {
         var validator = new UpdateUserValidator();
