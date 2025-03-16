@@ -17,6 +17,11 @@ public class AutoMapping : Profile
     {
         CreateMap<RequestExpenseJson, Expense>();
         CreateMap<RequestRegisterUserJson, User>().ForMember(destination => destination.Password, config => config.Ignore());
+
+        CreateMap<RequestExpenseJson, Expense>()
+             .ForMember(dest => dest.Tags, config => config.MapFrom(source => source.Tags.Distinct()));
+        CreateMap<Communication.Enums.Tag, Tag>()
+            .ForMember(dest => dest.Title, config => config.MapFrom(source => source));
     }
 
     private void EntityToResponse()

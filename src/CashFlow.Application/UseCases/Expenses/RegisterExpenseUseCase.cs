@@ -15,7 +15,12 @@ public class RegisterExpenseUseCase : IRegisterExpenseUseCase
     private readonly IMapper _mapper;
     private readonly ILoggedUser _loggedUser;
 
-    public RegisterExpenseUseCase(IExpensesWriteOnlyRepository expenseRepository, IUnitOfWork unitOfWork, IMapper mapper, ILoggedUser loggedUser)
+    public RegisterExpenseUseCase(
+        IExpensesWriteOnlyRepository expenseRepository,
+        IUnitOfWork unitOfWork,
+        IMapper mapper,
+        ILoggedUser loggedUser
+    )
     {
         _expenseRepository = expenseRepository;
         _unitOfWork = unitOfWork;
