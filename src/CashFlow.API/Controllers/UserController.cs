@@ -57,4 +57,14 @@ public class UserController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpDelete]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> DeleteProfile([FromServices] IDeleteUserAccountUseCase useCase)
+    {
+        await useCase.Execute();
+
+        return NoContent();
+    }
 }

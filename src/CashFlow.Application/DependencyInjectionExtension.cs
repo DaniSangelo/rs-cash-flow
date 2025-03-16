@@ -34,5 +34,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<ILoginUseCase, LoginUseCase>();
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
         services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
+        services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
     }
 }
