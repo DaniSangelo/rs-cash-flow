@@ -1,4 +1,5 @@
 ﻿using CashFlow.Application.UseCases.Expenses;
+using CashFlow.Application.UseCases.Expenses.Validators;
 using CashFlow.Communication.Enums;
 using CashFlow.Exception;
 using CommonTestUtilities.Requests;
@@ -7,7 +8,7 @@ using WebApi.Test.InLineData;
 
 namespace ValidatorsTest.Expenses;
 
-public class RegisterExpenseValidatorTest
+public class ExpenseValidatorTest
 {
     [Fact]
     public void Success()

@@ -7,7 +7,7 @@ using CommonTestUtilities.Repositories;
 using FluentAssertions;
 using System.Drawing.Text;
 
-namespace WebApi.Test.Expenses;
+namespace UseCases.Test.Expenses;
 
 public class GetAllExpensesUseCaseTest
 {

@@ -1,4 +1,5 @@
 ﻿using CashFlow.Application.UseCases.User;
+using CashFlow.Application.UseCases.User.Validators;
 using CashFlow.Communication.Requests;
 using FluentAssertions;
 using FluentValidation;

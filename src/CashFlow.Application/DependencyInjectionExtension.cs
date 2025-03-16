@@ -1,8 +1,11 @@
 ﻿using CashFlow.Application.AutoMapper;
 using CashFlow.Application.UseCases.Expenses;
+using CashFlow.Application.UseCases.Expenses.Interfaces;
 using CashFlow.Application.UseCases.Expenses.Reports;
 using CashFlow.Application.UseCases.Login;
+using CashFlow.Application.UseCases.Login.Interfaces;
 using CashFlow.Application.UseCases.User;
+using CashFlow.Application.UseCases.User.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CashFlow.Application;

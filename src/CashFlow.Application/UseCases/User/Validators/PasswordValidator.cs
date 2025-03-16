@@ -3,7 +3,7 @@ using FluentValidation;
 using FluentValidation.Validators;
 using System.Text.RegularExpressions;
 
-namespace CashFlow.Application.UseCases.User;
+namespace CashFlow.Application.UseCases.User.Validators;
 public class PasswordValidator<T> : PropertyValidator<T, string>
 {
     private const string ERROR_MESSAGE_KEY = "ErrorMessage";

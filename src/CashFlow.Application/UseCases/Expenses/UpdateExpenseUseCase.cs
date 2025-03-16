@@ -1,5 +1,7 @@
 ﻿
 using AutoMapper;
+using CashFlow.Application.UseCases.Expenses.Interfaces;
+using CashFlow.Application.UseCases.Expenses.Validators;
 using CashFlow.Communication.Requests;
 using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Services.LoggedUser;

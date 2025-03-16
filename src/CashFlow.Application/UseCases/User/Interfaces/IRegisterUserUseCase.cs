@@ -1,7 +1,7 @@
 ﻿using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 
-namespace CashFlow.Application.UseCases.User;
+namespace CashFlow.Application.UseCases.User.Interfaces;
 
 public interface IRegisterUserUseCase
 {

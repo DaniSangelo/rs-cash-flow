@@ -1,4 +1,5 @@
 ﻿
+using CashFlow.Application.UseCases.Expenses.Interfaces;
 using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Services.LoggedUser;
 using CashFlow.Exception;

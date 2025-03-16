@@ -1,4 +1,4 @@
-﻿using CashFlow.Application.UseCases.Expenses;
+﻿using CashFlow.Application.UseCases.Expenses.Interfaces;
 using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 using Microsoft.AspNetCore.Authorization;

@@ -4,6 +4,8 @@ using CashFlow.Exception.ExceptionBase;
 using CashFlow.Exception;
 using FluentValidation.Results;
 using CashFlow.Communication.Requests;
+using CashFlow.Application.UseCases.User.Interfaces;
+using CashFlow.Application.UseCases.User.Validators;
 
 namespace CashFlow.Application.UseCases.User;
 

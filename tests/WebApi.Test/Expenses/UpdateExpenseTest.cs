@@ -6,7 +6,7 @@ using System.Net;
 using System.Text.Json;
 using WebApi.Test.InLineData;
 
-namespace WebApi.Test.Expenses.Update;
+namespace WebApi.Test.Expenses;
 public class UpdateExpenseTest : CashFlowClassFixture
 {
     private const string RESOURCE = "api/Expenses";

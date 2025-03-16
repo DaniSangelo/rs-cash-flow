@@ -1,4 +1,5 @@
-﻿using CashFlow.Domain.Repositories;
+﻿using CashFlow.Application.UseCases.User.Interfaces;
+using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Services.LoggedUser;
 
 namespace CashFlow.Application.UseCases.User;

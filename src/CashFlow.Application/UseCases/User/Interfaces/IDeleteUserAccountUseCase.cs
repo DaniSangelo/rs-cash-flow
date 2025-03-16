@@ -1,4 +1,4 @@
-﻿namespace CashFlow.Application.UseCases.User;
+﻿namespace CashFlow.Application.UseCases.User.Interfaces;
 
 public interface IDeleteUserAccountUseCase
 {
