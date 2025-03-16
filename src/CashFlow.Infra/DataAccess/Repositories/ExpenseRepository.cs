@@ -55,6 +55,7 @@ internal class ExpenseRepository : IExpensesWriteOnlyRepository, IExpensesReadOn
             .AsNoTracking()
             .Where(expense => expense.Date >= startDate && expense.Date <= endDate && expense.UserId == user.Id)
             .OrderBy(expense => expense.Date)
+            .ThenBy(expense => expense.Title)
             .ToListAsync();
     }
 }

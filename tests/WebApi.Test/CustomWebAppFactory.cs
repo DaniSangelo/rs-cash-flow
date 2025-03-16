@@ -50,7 +50,7 @@ public class CustomWebAppFactory : WebApplicationFactory<Program>
         Expense_Team_Member = new ExpenseIdentityManager(expenseMember);
 
         var userAdmin = AddUserAdmin(dbContext, passwordEncrypter, accessTokenGenerator);
-        var expenseAdmin = AddExpenses(dbContext, userTeamMember, 2);
+        var expenseAdmin = AddExpenses(dbContext, userAdmin, 2);
         Expense_Admin = new ExpenseIdentityManager(expenseAdmin);
 
         dbContext.SaveChanges();
